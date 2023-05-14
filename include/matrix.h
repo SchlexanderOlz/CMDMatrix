@@ -13,10 +13,9 @@
 #define COLOR_LIGHT_MATRIX_GREEN 10
 #define COLOR_GRAY 11
 
-
-
-const char* matrix_chars = "0123456789ABCDEFGHRSTUVWXYZcdefghijklmnopz!@#$%^&*()_+{}[]|;:,./<>?";
-struct coord {
+const char *matrix_chars = "0123456789ABCDEFGHRSTUVWXYZcdefghijklmnopz!@#~$%^&*()_+{}[]|;:,./<>?";
+struct coord
+{
     int x;
     int y;
 };
@@ -25,24 +24,22 @@ struct raindrop
 {
     struct coord last_back;
     struct coord last_front;
-    char* content;
+    char *content;
 };
 
-struct raindropList {
-    struct raindrop* content;
+struct raindropList
+{
+    struct raindrop *content;
     size_t length;
 };
 
-
 struct raindropList raindrops;
 
-
-void SetupWindow();
-char* FormatCharArray(const char*);
 void DisplayFrame(struct raindropList);
-char* CreateRandomCharArray(const char*, int);
-char GetRandomCharacter(const char*);
+char *CreateRandomCharArray(const char *, int);
+char GetRandomCharacter(const char *);
 void DisplayMatrixRow(struct raindrop);
 void RainDropTick(struct raindropList);
 struct raindrop CreateNewRaindrop(int x);
 void SetEmpty();
+struct raindrop CreateNewRaindropRandomPos(int);
