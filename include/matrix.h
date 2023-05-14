@@ -1,9 +1,48 @@
 #include <ncurses.h>
+#include <time.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+#include <locale.h>
 
-char* matrix_chars = new char(
-    '0123456789ABCDEFGHRSTUVWXYZcdefghijklmnopz!@#$%^&*()_+{}[]|;:",./<>?あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわをん゛゜ー');
+#define SIZE(arr) ((arr) != NULL ? sizeof(arr) / sizeof(arr[0]) : 0)
+#define MAX_X getmaxx(stdscr)
+#define MAX_Y getmaxy(stdscr)
+
+#define COLOR_LIGHT_MATRIX_GREEN 10
+#define COLOR_GRAY 11
+
+
+
+const char* matrix_chars = "0123456789ABCDEFGHRSTUVWXYZcdefghijklmnopz!@#$%^&*()_+{}[]|;:,./<>?";
+struct coord {
+    int x;
+    int y;
+};
+
+struct raindrop
+{
+    struct coord last_back;
+    struct coord last_front;
+    char* content;
+};
+
+struct raindropList {
+    struct raindrop* content;
+    size_t length;
+};
+
+
+struct raindropList raindrops;
+
 
 void SetupWindow();
-char* FormatCharArray(char*);
-void DisplayFrame(char**);
-char* CreateRandomCharArray(char*, int);
+char* FormatCharArray(const char*);
+void DisplayFrame(struct raindropList);
+char* CreateRandomCharArray(const char*, int);
+char GetRandomCharacter(const char*);
+void DisplayMatrixRow(struct raindrop);
+void RainDropTick(struct raindropList);
+struct raindrop CreateNewRaindrop(int x);
+void SetEmpty();

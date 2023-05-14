@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/schlexander/Coding/CMDMatrix/include/matrix.h
+ncurses.h
+-
+time.h
+-
+stdio.h
+-
+stdlib.h
+-
+unistd.h
+-
+string.h
+-
+locale.h
+-
+
+/home/schlexander/Coding/CMDMatrix/src/matrix.c
+../include/matrix.h
+/home/schlexander/Coding/CMDMatrix/include/matrix.h
+
