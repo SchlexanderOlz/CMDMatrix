@@ -1,1 +1,0 @@
-/usr/bin/cc CMakeFiles/matrix.dir/src/matrix.c.o -o matrix  -lcurses /usr/lib/x86_64-linux-gnu/libform.so 

@@ -1,3 +1,0 @@
-/home/schlexander/Coding/CMDMatrix/build/CMakeFiles/rebuild_cache.dir
-/home/schlexander/Coding/CMDMatrix/build/CMakeFiles/edit_cache.dir
-/home/schlexander/Coding/CMDMatrix/build/CMakeFiles/matrix.dir
