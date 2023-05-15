@@ -10,6 +10,9 @@
 #define MAX_X getmaxx(stdscr)
 #define MAX_Y getmaxy(stdscr)
 
+#define BEGIN_CHAR 4
+
+
 #define COLOR_LIGHT_MATRIX_GREEN 10
 #define COLOR_GRAY 11
 
@@ -31,6 +34,7 @@ struct raindropList
 {
     struct raindrop *content;
     size_t length;
+    void (*sos)();
 };
 
 struct raindropList raindrops;

@@ -37,6 +37,7 @@ int main()
         refresh();
         SetEmpty();
         napms(100 - (MAX_Y / 2));
+        //napms(1000);
     }
 
     endwin();
@@ -74,7 +75,7 @@ void DisplayMatrixRow(struct raindrop drop)
     size_t len = strlen(drop.content);
 
     attron(COLOR_PAIR(1));
-    for (size_t y = 0; y < len - 3; y++)
+    for (size_t y = 0; y < len - BEGIN_CHAR; y++)
     {
         int row = y + drop.last_back.y;
         if (row < 0 || row >= MAX_Y)
@@ -87,16 +88,16 @@ void DisplayMatrixRow(struct raindrop drop)
     attroff(COLOR_PAIR(1));
 
     attron(COLOR_PAIR(4));
-    size_t green_row = len + drop.last_back.y - 3;
+    size_t green_row = len + drop.last_back.y - BEGIN_CHAR;
     if (!(green_row < 0 || green_row >= MAX_Y))
     {
         move(green_row, drop.last_back.x);
-        printw("%c", drop.content[len - 4]);
+        printw("%c", drop.content[len - BEGIN_CHAR]);
     }
     attroff(COLOR_PAIR(4));
 
     attron(COLOR_PAIR(2));
-    for (size_t y = len - 2; y <= len; y++)
+    for (size_t y = len - BEGIN_CHAR + 1; y <= len; y++)
     {
         int row = y + drop.last_back.y;
         if (row < 0 || row >= MAX_Y)
@@ -112,7 +113,6 @@ void DisplayMatrixRow(struct raindrop drop)
     size_t row = len + drop.last_back.y;
     if (!(row < 0 || row >= MAX_Y))
     {
-        attron(COLOR_PAIR(3));
         move(row, drop.last_back.x);
         printw("%c", drop.content[len - 1]);
     }
@@ -133,7 +133,6 @@ void RainDropTick(struct raindropList raindrops)
         new_content[len - 1] = GetRandomCharacter(matrix_chars);
 
         free(raindrops.content[i].content);
-        raindrops.content[i].last_front.y++;
         raindrops.content[i].content = new_content;
 
         if (raindrops.content[i].last_back.y >= getmaxy(stdscr))
@@ -146,12 +145,14 @@ void RainDropTick(struct raindropList raindrops)
 
 struct raindrop CreateNewRaindrop(int x)
 {
-    char *content = CreateRandomCharArray(matrix_chars, rand() % (MAX_Y / 2) + 3); // Potential error source
+    char *content = CreateRandomCharArray(matrix_chars, rand() % (MAX_Y / 2) + BEGIN_CHAR); // Potential error source
+                                                                            // The begin char also indicates the minimum amount of characters needed
     return (struct raindrop){(struct coord){x, -strlen(content)}, (struct coord){x, 0}, content};
 }
 
 struct raindrop CreateNewRaindropRandomPos(int x) {
-    char *content = CreateRandomCharArray(matrix_chars, rand() % (MAX_Y / 2) + 3); // Potential error source
+    char *content = CreateRandomCharArray(matrix_chars, rand() % (MAX_Y / 2) + BEGIN_CHAR); // Potential error source
+                                                                            // The begin char also indicates the minimum amount of characters needed
     int factor = rand() % MAX_Y;
     return (struct raindrop){(struct coord){x, -strlen(content) - factor}, (struct coord){x, -factor}, content};
 }
