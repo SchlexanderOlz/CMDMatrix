@@ -4,7 +4,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
-#include <locale.h>
 
 #define SIZE(arr) ((arr) != NULL ? sizeof(arr) / sizeof(arr[0]) : 0)
 #define MAX_X getmaxx(stdscr)
