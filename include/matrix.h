@@ -44,5 +44,5 @@ char GetRandomCharacter(const char *);
 void DisplayMatrixRow(struct raindrop);
 void RainDropTick(struct raindropList);
 struct raindrop CreateNewRaindrop(int x);
-void SetEmpty();
+void SetEmpty(void);
 struct raindrop CreateNewRaindropRandomPos(int);

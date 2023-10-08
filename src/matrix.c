@@ -156,7 +156,7 @@ struct raindrop CreateNewRaindropRandomPos(int x) {
     return (struct raindrop){(struct coord){x, -strlen(content) - factor}, (struct coord){x, -factor}, content};
 }
 
-void SetEmpty()
+void SetEmpty(void)
 {
     for (size_t y = 0; y < MAX_Y; y++)
     {
